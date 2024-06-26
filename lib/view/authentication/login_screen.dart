@@ -3,10 +3,14 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/authentication/register_screen.dart';
 import 'package:lung_cancer/view/authentication/widget/auth_background.dart';
 import 'package:lung_cancer/view/main_screen.dart';
+import 'package:lung_cancer/view_model/cubit/auth_cubit/auth_cubit.dart';
+import 'package:lung_cancer/view_model/cubit/auth_cubit/auth_state.dart';
 import 'package:svg_flutter/svg.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -127,29 +131,50 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 39),
-                  child: SizedBox(
-                      height: 50,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => MainScreen()));
-                          },
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(blueColor)),
-                          child: const Center(
-                            child: Text(
-                              "Sign in",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ))),
+                BlocConsumer<AuthCubit, AuthMainState>(
+                  builder: (context, state) {
+                    return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 39),
+                        child: SizedBox(
+                            height: 50,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  if (_globalKey.currentState!.validate()) {
+                                    AuthCubit.get(context).login(
+                                        emailController.text,
+                                        passController.text,
+                                        context);
+                                  }
+                                },
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStateProperty.all(blueColor)),
+                                child: const Center(
+                                  child: Text(
+                                    "Sign in",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ))));
+                  },
+                  listener: (BuildContext context,  state) async{
+                    if (state is LoginLoadingState) {
+                      SmartDialog.showLoading();
+                    await  Future.delayed(const Duration(seconds: 2));
+                     SmartDialog.dismiss();
+
+                    }
+                    if (state is LoginSuccessState) {
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const MainScreen()));
+                    }
+
+                  },
                 ),
                 const SizedBox(
                   height: 10,
