@@ -42,7 +42,7 @@ class DioHelper {
     // );
     try {
       dio.options.headers = {
-        'Authorization': 'Bearer ${token ?? ''}',
+        'User-Token':token,
       };
       final Response response = await dio.get(
         url,
@@ -66,7 +66,7 @@ class DioHelper {
   }) async {
     try {
       dio.options.headers = {
-        'Authorization': 'Bearer ${token ?? ''}',
+        'User-Token':token ,
       };
       final Response response = await dio.post(
         url,
@@ -106,7 +106,7 @@ class DioHelper {
   }) async {
     try {
       dio.options.headers = {
-        'Authorization': 'Bearer ${token ?? ''}',
+        'User-Token': token,
       };
       final Response response = await dio.put(
         url,
@@ -136,7 +136,7 @@ class DioHelper {
     bool files = false,
   }) async {
     dio.options.headers = {
-      'Authorization': 'Bearer $token',
+      'User-Token': token,
       // 'Authorization': token ,
       'Content-Type': 'application/json',
     };

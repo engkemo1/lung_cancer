@@ -25,7 +25,6 @@ class _MainScreenState extends State<MainScreen> {
     const Detector1Screen(),
     const ChatListScreen(),
     const ProfileScreen(),
-
   ];
 
   void _onItemTapped(int index) {

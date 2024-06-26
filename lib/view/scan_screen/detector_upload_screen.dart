@@ -1,16 +1,36 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/component/app_bar_widget.dart';
 
-import 'detector3_screen.dart';
+import 'detector_result_screen.dart';
 
-class Detector2Screen extends StatelessWidget {
-  const Detector2Screen({super.key});
+class Detector2Screen extends StatefulWidget {
+   Detector2Screen({super.key});
+
+  @override
+  State<Detector2Screen> createState() => _Detector2ScreenState();
+}
+
+class _Detector2ScreenState extends State<Detector2Screen> {
+  File? _image;
+ // This will store the picked image
+  final _picker = ImagePicker();
+ // Image picker instance
+  Future<void> _openImagePicker() async {
+    final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _image = File(pickedImage.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+
     return SafeArea(
         child: Scaffold(
       appBar: appBar(hasIconBack: true, context: context, title: "Detector"),
@@ -41,7 +61,8 @@ class Detector2Screen extends StatelessWidget {
             child: ElevatedButton(
                 style: ButtonStyle(backgroundColor: WidgetStateProperty.all(blueColor)),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector3Screen()));
+                  _openImagePicker();
+                  // Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector3Screen()));
 
                 },
                 child: const Center(

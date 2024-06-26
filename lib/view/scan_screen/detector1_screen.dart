@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/component/app_bar_widget.dart';
-import 'package:lung_cancer/view/scan_screen/detector2_screen.dart';
+import 'package:lung_cancer/view/scan_screen/detector_upload_screen.dart';
 
 class Detector1Screen extends StatelessWidget {
   const Detector1Screen({super.key});
