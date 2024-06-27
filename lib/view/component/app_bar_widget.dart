@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'clipper.dart';
 
- PreferredSizeWidget appBar({String? title, required bool hasIconBack,required BuildContext context}) {
+ PreferredSizeWidget appBar({String? title, required bool hasIconBack,required,Widget? child, required BuildContext context}) {
   return PreferredSize(
     preferredSize: const Size(double.infinity,151),
     child: Stack(
@@ -40,7 +40,9 @@ import 'clipper.dart';
                 Navigator.pop(context);
               },
               child: Image.asset("images/arrow_back.png"),
-            )):const SizedBox()
+            )):const SizedBox(),
+child??SizedBox.shrink(),
+
       ],
     ),
   );
