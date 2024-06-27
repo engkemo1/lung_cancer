@@ -26,14 +26,12 @@ class AuthCubit extends Cubit<AuthMainState> {
       var response = await DioHelper.postData(
           url: "$baseUrl/user_auth.php?action=login",
           data: {'email': email, 'password': password});
-      String data = response.data; // Assuming you have the data string
+      var data = response.data; // Assuming you have the data string
 
-      Map<String, dynamic> parsedData = json.decode(data);
 
-      if (parsedData["success"] == true) {
+      if (data["success"] == true) {
         await SmartDialog.showToast("Login Successfully");
-        var responseBody = parsedData['data'];
-        print(parsedData);
+        var responseBody = data['data'];
         user = User.fromJson(responseBody);
         CacheHelper.put(key: 'code', value: user.code);
         CacheHelper.put(key: 'name', value: user.userName);
@@ -42,9 +40,11 @@ class AuthCubit extends Cubit<AuthMainState> {
 
         emit(LoginSuccessState());
       } else {
-        SmartDialog.showToast(parsedData["error"]);
+        SmartDialog.showToast(data["error"]);
       }
     } on DioError catch (e) {
+      SmartDialog.showToast(e.response!.data["error"]);
+
       emit(LoginErrorState(e));
     }
   }
@@ -65,15 +65,13 @@ class AuthCubit extends Cubit<AuthMainState> {
     try {
       var response = await DioHelper.postData(
           url: "$baseUrl/user_auth.php?action=register", data: body);
-      String data = response.data; // Assuming you have the data string
+      var data = response.data; // Assuming you have the data string
 
 // Parse the JSON string into a Map
-      Map<String, dynamic> parsedData = json.decode(data);
 
-      if (parsedData["success"] == true) {
+      if (data["success"] == true) {
         await SmartDialog.showToast("Login Successfully");
-        var responseBody = parsedData['data'];
-        print(parsedData);
+        var responseBody = data['data'];
         user = User.fromJson(responseBody);
         CacheHelper.put(key: 'code', value: user.code);
         CacheHelper.put(key: 'name', value: user.userName);
@@ -82,10 +80,11 @@ class AuthCubit extends Cubit<AuthMainState> {
         emit(RegisterSuccessState());
 
       } else {
-        await SmartDialog.showToast(parsedData['error']);
-        print(parsedData);
+        await SmartDialog.showToast(data['error']);
       }
     } on DioError catch (e) {
+      await SmartDialog.showToast(e.response!.data['error']);
+
       emit(RegisterErrorState(e));
     }
   }

@@ -328,9 +328,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: ElevatedButton(
                               onPressed: () {
                                 if(_globalKey.currentState!.validate()){
-                                  AuthCubit.get(context).register(
-                                      emailController.text, passController.text,
-                                      userNameController.text, index==0?"doctor":"user", context);
+                                  if(index!=0){
+                                    AuthCubit.get(context).register(
+                                        emailController.text, passController.text,
+                                        userNameController.text, index==1?"doctor":index==2?"user":"other", context);
+                                  }else{
+                                    SmartDialog.showToast("please select type");
+                                  }
+
                                 }
 
                               },

@@ -57,6 +57,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Align(
                     alignment: Alignment.center,
                     child: TextFormField(
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Email is required';
+                        }
+                        return null;
+                      },
                         controller: emailController,
                         decoration: InputDecoration(
                           hintStyle: const TextStyle(color: Colors.grey),
@@ -83,6 +89,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Align(
                     alignment: Alignment.center,
                     child: TextFormField(
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password is required';
+                        }
+                        if (value.length < 8) {
+                          return 'Password must be at least 8 characters';
+                        }
+                        // Add more validation rules as needed
+                        return null;
+                      },
                         obscureText: _hide,
                         controller: passController,
                         decoration: InputDecoration(
