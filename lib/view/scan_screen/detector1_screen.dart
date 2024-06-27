@@ -3,8 +3,8 @@ import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/component/app_bar_widget.dart';
 import 'package:lung_cancer/view/scan_screen/detector_upload_screen.dart';
 
-class Detector1Screen extends StatelessWidget {
-  const Detector1Screen({super.key});
+class DetectorScreen extends StatelessWidget {
+  const DetectorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class Detector1Screen extends StatelessWidget {
                 child: ElevatedButton(
                   style: ButtonStyle(backgroundColor: WidgetStateProperty.all(blueColor)),
                     onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector2Screen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>DetectorUploadScreen()));
                     },
                     child: const Center(
                       child: Text(
@@ -50,7 +50,7 @@ class Detector1Screen extends StatelessWidget {
                 child: ElevatedButton(
                     style: ButtonStyle(backgroundColor: WidgetStateProperty.all(blueColor)),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector2Screen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>DetectorUploadScreen()));
 
                     },
                     child: const Center(

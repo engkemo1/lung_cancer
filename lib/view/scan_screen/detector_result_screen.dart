@@ -5,10 +5,10 @@ import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/component/app_bar_widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class Detector3Screen extends StatelessWidget {
+class DetectorResultScreen extends StatelessWidget {
   final String result;
   final File image;
-  const Detector3Screen({super.key, required this.result, required this.image});
+  const DetectorResultScreen({super.key, required this.result, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -49,25 +49,25 @@ const SizedBox(height: 40,),
               ),
               const SizedBox(height: 40,),
 
-              SizedBox(
-                height: 50,width: 221,
-                child: ElevatedButton(
-                    style: ButtonStyle(backgroundColor: WidgetStateProperty.all(blueColor)),
-                    onPressed: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector2Screen()));
-
-                    },
-
-                    child: const Center(
-                      child: Text(
-                        "Save Results",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    )),
-              ),
+              // SizedBox(
+              //   height: 50,width: 221,
+              //   child: ElevatedButton(
+              //       style: ButtonStyle(backgroundColor: WidgetStateProperty.all(blueColor)),
+              //       onPressed: () {
+              //         // Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector2Screen()));
+              //
+              //       },
+              //
+              //       child: const Center(
+              //         child: Text(
+              //           "Save Results",
+              //           style: TextStyle(
+              //               color: Colors.white,
+              //               fontSize: 18,
+              //               fontWeight: FontWeight.w700),
+              //         ),
+              //       )),
+              // ),
               const Spacer(flex: 2,),
 
             ],

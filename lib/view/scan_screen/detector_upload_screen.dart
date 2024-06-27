@@ -11,14 +11,14 @@ import 'package:lung_cancer/view_model/cubit/detect_cancer/detecet_cancer_cubit.
 import '../../view_model/cubit/detect_cancer/detetcet_cancer_state.dart';
 import 'detector_result_screen.dart';
 
-class Detector2Screen extends StatefulWidget {
-   Detector2Screen({super.key});
+class DetectorUploadScreen extends StatefulWidget {
+   DetectorUploadScreen({super.key});
 
   @override
-  State<Detector2Screen> createState() => _Detector2ScreenState();
+  State<DetectorUploadScreen> createState() => _DetectorUploadScreenState();
 }
 
-class _Detector2ScreenState extends State<Detector2Screen> {
+class _DetectorUploadScreenState extends State<DetectorUploadScreen> {
   File? _image;
  // This will store the picked image
   final _picker = ImagePicker();
@@ -71,7 +71,7 @@ class _Detector2ScreenState extends State<Detector2Screen> {
                   await  Future.delayed(Duration(seconds: 5));
                     SmartDialog.dismiss();
                   } if(state is DetcetCancerSuccessState){
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector3Screen(image: _image!,result: DetcetCancerCubit.get(context).result,)));
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>DetectorResultScreen(image: _image!,result: DetcetCancerCubit.get(context).result,)));
 
                   }
                 },
