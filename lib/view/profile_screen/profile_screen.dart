@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/authentication/login_screen.dart';
 import 'package:lung_cancer/view/component/app_bar_widget.dart';
+import 'package:lung_cancer/view_model/database/local.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -26,8 +27,8 @@ class ProfileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text(
-                            "Elsia Rhiel Madsen",
+                           Text(
+                            CacheHelper.get(key: "name"),
                             style:
                             TextStyle(fontWeight: FontWeight.w500,
                                 fontSize: 20),
@@ -257,6 +258,7 @@ class ProfileScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                           onTap: () {
+                            CacheHelper.clearData();
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                                     builder: (_) => LoginScreen()));

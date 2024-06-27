@@ -27,7 +27,7 @@ class DoctorModel {
 class DoctorData {
   String? userName;
   String? img;
-  int? distance;
+  var distance;
 
   DoctorData({this.userName, this.img, this.distance});
 

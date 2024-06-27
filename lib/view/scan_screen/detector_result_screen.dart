@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/component/app_bar_widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class Detector3Screen extends StatelessWidget {
-  const Detector3Screen({super.key});
+  final String result;
+  final File image;
+  const Detector3Screen({super.key, required this.result, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +22,26 @@ class Detector3Screen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Spacer(),
-Image.asset("images/testcancer.png"),
+Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: Image.file(image,height: 300,),
+),
 const SizedBox(height: 40,),
               Align(
                 alignment: Alignment.center,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   CircularPercentIndicator(
-                    radius: 60.0,
-                    lineWidth: 9.0,
-                    percent: 0.5,
-
-                    center: Text("50%"),
-                    progressColor: const Color(0xff16A799),
-                  ),
+                  //  CircularPercentIndicator(
+                  //   radius: 60.0,
+                  //   lineWidth: 9.0,
+                  //   percent: 0.5,
+                  //
+                  //   center: Text("50%"),
+                  //   progressColor: const Color(0xff16A799),
+                  // ),
                   const SizedBox(width: 30,),
-                  const Text("cancer cells",   style: TextStyle(
+                   Text(result,   style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w700),)

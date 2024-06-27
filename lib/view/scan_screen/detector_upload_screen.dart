@@ -1,10 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/component/app_bar_widget.dart';
+import 'package:lung_cancer/view_model/cubit/detect_cancer/detecet_cancer_cubit.dart';
 
+import '../../view_model/cubit/detect_cancer/detetcet_cancer_state.dart';
 import 'detector_result_screen.dart';
 
 class Detector2Screen extends StatefulWidget {
@@ -58,22 +62,41 @@ class _Detector2ScreenState extends State<Detector2Screen> {
           const SizedBox(height: 50,),
           SizedBox(
             height: 50,width: 221,
-            child: ElevatedButton(
-                style: ButtonStyle(backgroundColor: WidgetStateProperty.all(blueColor)),
-                onPressed: () {
-                  _openImagePicker();
-                  // Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector3Screen()));
+            child: BlocProvider(
+              create: (context)=>DetcetCancerCubit(),
+              child: BlocConsumer<DetcetCancerCubit,DetcetCancerMainState>(
+                listener: (context,state)async{
+                  if(state is DetcetCancerLoadingState){
+                    SmartDialog.showLoading();
+                  await  Future.delayed(Duration(seconds: 5));
+                    SmartDialog.dismiss();
+                  } if(state is DetcetCancerSuccessState){
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>Detector3Screen(image: _image!,result: DetcetCancerCubit.get(context).result,)));
 
+                  }
                 },
-                child: const Center(
-                  child: Text(
-                    "upload image",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700),
-                  ),
-                )),
+                builder: (context,state) {
+                  return ElevatedButton(
+                      style: ButtonStyle(backgroundColor: WidgetStateProperty.all(blueColor)),
+                      onPressed: () {
+
+                        _openImagePicker().then((v){
+                          DetcetCancerCubit.get(context).detectImage(_image!.path, context);
+                        });
+
+                      },
+                      child: const Center(
+                        child: Text(
+                          "upload image",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ));
+                }
+              ),
+            ),
           ),
           const Spacer(flex: 2,),
 

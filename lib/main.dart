@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:lung_cancer/view/authentication/login_screen.dart';
+import 'package:lung_cancer/view/main_screen.dart';
 import 'package:lung_cancer/view_model/cubit/auth_cubit/auth_cubit.dart';
 import 'package:lung_cancer/view_model/cubit/home_cubit/home_cubit.dart';
 import 'package:lung_cancer/view_model/database/local.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         navigatorObservers: [FlutterSmartDialog.observer],
         // here
         builder: FlutterSmartDialog.init(),
-        home:  LoginScreen(),
+        home: CacheHelper.get(key: "code")==null? LoginScreen():MainScreen(),
       ),
     );
   }
