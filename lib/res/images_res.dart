@@ -8,5 +8,4 @@ class ImagesRes {
 
   static const String PLUGIN_NAME = 'lung_cancer';
   static const String PLUGIN_VERSION = '1.0.0+1';
-  static const String REMINDER_BACKGROUND = 'images/reminder_background.png';
 }
