@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:lung_cancer/constants.dart';
 import 'package:lung_cancer/view/chat_screen/chat_list_screen.dart';
 import 'package:lung_cancer/view/profile_screen/profile_screen.dart';
+import 'package:lung_cancer/view/reminder_screen/reminder_screen.dart';
 import 'package:lung_cancer/view/scan_screen/detector1_screen.dart';
 
 import 'home_screen/home_screen.dart';
@@ -22,7 +23,9 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static  final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const Detector1Screen(),
+    const ReminderScreen(),
+
+    const DetectorScreen(),
     const ChatListScreen(),
     const ProfileScreen(),
   ];
@@ -54,10 +57,16 @@ class _MainScreenState extends State<MainScreen> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset("images/scan.png"),
-              activeIcon: Image.asset("images/scan2.png"),
-              label: ""
+                icon: Image.asset("images/reminder.png"),
+                activeIcon:Image.asset("images/reminder.png",color: blueColor,),
+                label: "Reminder"
             ),
+            BottomNavigationBarItem(
+                icon: Image.asset("images/scan.png"),
+                activeIcon: Image.asset("images/scan2.png"),
+                label: ""
+            ),
+
             BottomNavigationBarItem(
               icon: Image.asset("images/chat.png"),
               activeIcon:Image.asset("images/chat.png",color: blueColor,),

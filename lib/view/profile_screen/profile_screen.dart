@@ -11,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: appBar(hasIconBack: true, context: context, title: "profile"),
+          appBar: appBar(hasIconBack: false, context: context, title: "profile"),
           body: ListView(
             children: [
               const SizedBox(height: 70,),
